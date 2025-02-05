@@ -4,7 +4,6 @@ const Empleado = require("../models/empleado");
 
 const router = express.Router();
 
-// GET - Obtener empleados por departamento
 router.get("/:departamento", verifyAuth, async (req, res) => {
   const { departamento } = req.params;
   try {
@@ -15,7 +14,6 @@ router.get("/:departamento", verifyAuth, async (req, res) => {
   }
 });
 
-// POST - Crear un empleado
 router.post("/", verifyAuth, async (req, res) => {
   const { nombre, contraseña, departamento } = req.body;
 

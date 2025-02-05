@@ -7,7 +7,7 @@ const historialSchema = new mongoose.Schema({
   cantidadArticulos: { type: Number, required: true },
   departamento: { type: String, required: true },
   reportes: { type: String, required: false },
-  articulos: { type: String, required: false }, // Nuevo campo
+  articulos: { type: String, required: false },
 });
 
 module.exports = mongoose.model("Historial", historialSchema);

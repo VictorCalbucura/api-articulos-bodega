@@ -4,7 +4,6 @@ const Departamento = require("../models/departamento");
 
 const router = express.Router();
 
-// GET - Obtener todos los departamentos
 router.get("/", verifyAuth, async (req, res) => {
   try {
     const departamentos = await Departamento.find();
@@ -14,7 +13,6 @@ router.get("/", verifyAuth, async (req, res) => {
   }
 });
 
-// POST - Crear un departamento
 router.post("/", verifyAuth, async (req, res) => {
   const { nombre, contraseña } = req.body;
 
@@ -36,7 +34,6 @@ router.post("/", verifyAuth, async (req, res) => {
   }
 });
 
-// DELETE - Eliminar un departamento por ID
 router.delete("/:id", verifyAuth, async (req, res) => {
   const { id } = req.params;
 

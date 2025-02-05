@@ -4,7 +4,7 @@ const ArticuloSchema = new mongoose.Schema({
   id: { type: String, required: true },
   nombre: { type: String, required: true },
   descripcion: { type: String, required: true },
-  departamento: { type: String, required: true }, // Relación con el departamento
+  departamento: { type: String, required: true },
   imagen: { type: String },
   localizacion: { type: String },
   cantidad: { type: Number, default: 1 },

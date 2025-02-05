@@ -6,9 +6,8 @@ const Empleado = require("../models/empleado");
 
 const router = express.Router();
 
-// POST - Login para departamentos o empleados
 router.post("/login", async (req, res) => {
-  const { username, password, tipo } = req.body; // tipo: 'departamento' o 'empleado'
+  const { username, password, tipo } = req.body;
 
   if (!username || !password || !tipo) {
     return res.status(400).json({ error: "Datos incompletos" });

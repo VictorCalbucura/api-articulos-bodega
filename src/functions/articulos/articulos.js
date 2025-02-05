@@ -4,7 +4,6 @@ const Articulo = require("../models/articulo");
 
 const router = express.Router();
 
-// GET - Obtener todos los artículos
 router.get("/datos", verifyAuth, async (req, res) => {
     try {
       const articulos = await Articulo.find();
@@ -18,7 +17,6 @@ router.get("/datos", verifyAuth, async (req, res) => {
     }
   });
 
-// POST - Crear un artículo
 router.post("/", verifyAuth, async (req, res) => {
   const { id, nombre, descripcion, departamento, imagen, localizacion, cantidad } = req.body;
 

@@ -4,7 +4,6 @@ const Historial = require("../models/historial");
 
 const router = express.Router();
 
-// GET - Obtener el historial completo
 router.get("/", verifyAuth, async (req, res) => {
   try {
     const historial = await Historial.find();
@@ -14,7 +13,6 @@ router.get("/", verifyAuth, async (req, res) => {
   }
 });
 
-// POST - Registrar una entrada en el historial
 router.post("/", verifyAuth, async (req, res) => {
     const { empleado, hora, fecha, cantidadArticulos, departamento, reportes, articulos } = req.body;
   
@@ -30,7 +28,7 @@ router.post("/", verifyAuth, async (req, res) => {
         cantidadArticulos,
         departamento,
         reportes,
-        articulos, // Guardar el listado de artículos
+        articulos,
       });
   
       await entrada.save();
@@ -40,7 +38,6 @@ router.post("/", verifyAuth, async (req, res) => {
     }
   });
 
-// DELETE - Eliminar una entrada del historial por ID
 router.delete("/:id", verifyAuth, async (req, res) => {
   const { id } = req.params;
 

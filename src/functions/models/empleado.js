@@ -4,7 +4,7 @@ const bcrypt = require("bcrypt");
 const EmpleadoSchema = new mongoose.Schema({
   nombre: { type: String, required: true },
   password: { type: String, required: true },
-  departamento: { type: String, required: true }, // Relación con el departamento
+  departamento: { type: String, required: true },
 });
 
 EmpleadoSchema.pre("save", async function (next) {
