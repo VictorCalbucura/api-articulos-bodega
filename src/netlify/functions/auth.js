@@ -1,10 +1,25 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const Departamento = require("../models/departamento");
-const Empleado = require("../models/empleado");
+const Departamento = require("./models/departamento");
+const Empleado = require("./models/empleado");
 
 const router = express.Router();
+
+const verifyAuth = (req, res, next) => {
+  const token = req.header("Authorization").replace("Bearer ", "");
+  if (!token) {
+    return res.status(401).json({ error: "Acceso denegado" });
+  }
+
+  try {
+    const verified = jwt.verify(token, process.env.JWT_SECRET);
+    req.user = verified;
+    next();
+  } catch (error) {
+    res.status(400).json({ error: "Token no válido" });
+  }
+};
 
 router.post("/login", async (req, res) => {
   const { username, password, tipo } = req.body;
@@ -32,4 +47,4 @@ router.post("/login", async (req, res) => {
   }
 });
 
-module.exports = router;
+module.exports = { router, verifyAuth };
