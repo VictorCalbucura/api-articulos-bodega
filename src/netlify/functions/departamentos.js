@@ -1,6 +1,5 @@
 const express = require("express");
 const serverless = require("serverless-http");
-const bcrypt = require("bcrypt");
 const mongoose = require("mongoose");
 const Departamento = require("./models/departamento");
 
@@ -40,10 +39,9 @@ router.post("/", async (req, res) => {
       return res.status(400).json({ error: "El departamento ya existe" });
     }
 
-    const hashedPassword = await bcrypt.hash(password, 10);
     const departamento = new Departamento({
       nombre,
-      password: hashedPassword,
+      password,
     });
 
     await departamento.save();
