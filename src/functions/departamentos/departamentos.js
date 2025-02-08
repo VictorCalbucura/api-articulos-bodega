@@ -14,18 +14,24 @@ router.get("/", verifyAuth, async (req, res) => {
 });
 
 router.post("/", verifyAuth, async (req, res) => {
-  const { nombre, contraseña } = req.body;
+  const { nombre, password } = req.body;
 
-  if (!nombre || !contraseña) {
+  if (!nombre || !password) {
     return res.status(400).json({ error: "Datos incompletos" });
   }
 
   try {
-    const hashedPassword = await bcrypt.hash(contraseña, 10);
+    const existe = await Departamento.findOne({ nombre });
+    if (existe) {
+      return res.status(400).json({ error: "El departamento ya existe" });
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
     const departamento = new Departamento({
       nombre,
-      contraseña: hashedPassword,
+      password: hashedPassword,
     });
+
 
     await departamento.save();
     res.status(201).json(departamento);

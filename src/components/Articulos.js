@@ -5,7 +5,7 @@ function Articulos() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch("http://localhost:3000/api/articulos")
+    fetch("https://apibodega.netlify.app/articulos")
       .then((response) => {
         if (!response.ok) throw new Error("Error al obtener los datos");
         return response.json();

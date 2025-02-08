@@ -5,7 +5,7 @@ function Departamentos() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch("http://localhost:3000/api/departamentos")
+    fetch("https://apibodega.netlify.app/departamentos")
       .then((response) => {
         if (!response.ok) throw new Error("Error al obtener los datos");
         return response.json();
