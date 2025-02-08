@@ -1,6 +1,5 @@
 const express = require("express");
 const serverless = require("serverless-http");
-const { verifyAuth } = require("./auth");
 const Departamento = require("./models/departamento");
 
 const app = express();
@@ -8,7 +7,7 @@ const router = express.Router();
 
 app.use(express.json());
 
-router.get("/", verifyAuth, async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     const departamentos = await Departamento.find();
     res.json(departamentos);
@@ -17,7 +16,7 @@ router.get("/", verifyAuth, async (req, res) => {
   }
 });
 
-router.post("/", verifyAuth, async (req, res) => {
+router.post("/", async (req, res) => {
   const { nombre, password } = req.body;
 
   if (!nombre || !password) {
@@ -43,7 +42,7 @@ router.post("/", verifyAuth, async (req, res) => {
   }
 });
 
-router.delete("/:id", verifyAuth, async (req, res) => {
+router.delete("/:id", async (req, res) => {
   const { id } = req.params;
 
   try {

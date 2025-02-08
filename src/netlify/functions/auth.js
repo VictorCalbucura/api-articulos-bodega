@@ -7,7 +7,12 @@ const Empleado = require("./models/empleado");
 const router = express.Router();
 
 const verifyAuth = (req, res, next) => {
-  const token = req.header("Authorization").replace("Bearer ", "");
+  const authHeader = req.header("Authorization");
+  if (!authHeader) {
+    return res.status(401).json({ error: "Acceso denegado" });
+  }
+
+  const token = authHeader.replace("Bearer ", "");
   if (!token) {
     return res.status(401).json({ error: "Acceso denegado" });
   }
