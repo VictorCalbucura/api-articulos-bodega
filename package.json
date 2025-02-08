@@ -17,8 +17,10 @@
     "jsonwebtoken": "^9.0.0"
   },
   "scripts": {
-    "build": "echo 'No build step required'",
-    "start": "node src/netlify/functions/departamentos.js"
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
