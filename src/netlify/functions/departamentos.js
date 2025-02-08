@@ -1,8 +1,12 @@
 const express = require("express");
+const serverless = require("serverless-http");
 const { verifyAuth } = require("./auth");
 const Departamento = require("./models/departamento");
 
+const app = express();
 const router = express.Router();
+
+app.use(express.json());
 
 router.get("/", verifyAuth, async (req, res) => {
   try {
@@ -32,7 +36,6 @@ router.post("/", verifyAuth, async (req, res) => {
       password: hashedPassword,
     });
 
-
     await departamento.save();
     res.status(201).json(departamento);
   } catch (error) {
@@ -56,4 +59,6 @@ router.delete("/:id", verifyAuth, async (req, res) => {
   }
 });
 
-module.exports = router;
+app.use("/.netlify/functions/departamentos", router);
+
+module.exports.handler = serverless(app);
