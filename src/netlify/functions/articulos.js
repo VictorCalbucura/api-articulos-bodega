@@ -1,6 +1,6 @@
 const express = require("express");
-const { verifyAuth } = require("../middlewares/auth");
-const Articulo = require("../models/articulo");
+const { verifyAuth } = require("./middlewares/auth");
+const Articulo = require("./models/articulo");
 
 const router = express.Router();
 
