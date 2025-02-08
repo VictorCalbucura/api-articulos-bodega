@@ -1,1 +1,3 @@
-/departamentos    /.netlify/functions/departamentos    200
+/apibodega.netlify.app/* https://apibodega.netlify.app/:splat 200
+
+/* /index.html 200
