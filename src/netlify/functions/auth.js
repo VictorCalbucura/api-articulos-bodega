@@ -1,10 +1,16 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const mongoose = require("mongoose");
 const Departamento = require("./models/departamento");
 const Empleado = require("./models/empleado");
 
 const router = express.Router();
+
+mongoose.connect(process.env.MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 
 const verifyAuth = (req, res, next) => {
   const authHeader = req.header("Authorization");
@@ -41,7 +47,7 @@ router.post("/login", async (req, res) => {
       user = await Empleado.findOne({ nombre: username });
     }
 
-    if (!user || !(await bcrypt.compare(password, user.contraseña))) {
+    if (!user || !(await bcrypt.compare(password, user.password))) {
       return res.status(401).json({ error: "Credenciales incorrectas" });
     }
 
